@@ -1,0 +1,20 @@
+{
+  // See https://go.microsoft.com/fwlink/?LinkId=733558
+  // for the documentation about the tasks.json format
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Prepare Staging",
+      "type": "shell",
+      "options": {
+        "shell": {
+          "executable": "powershell"
+        },
+      },
+      "command": [
+        "Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope Process;",
+        ".\\.vscode\\KaTeX表現のcssをCDN参照に変更する.ps1 .\\*;"
+      ]
+    }
+  ]
+}
