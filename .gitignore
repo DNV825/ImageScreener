@@ -1,2 +1,4 @@
-/src/ImageScreener/bin
-/src/ImageScreener/obj
+/src/*/bin
+/src/*/obj
+/test/*/bin
+/test/*/obj
