@@ -1,0 +1,59 @@
+@startuml !0
+salt
+!procedure _image($x)
+{+
+.
+.
+\t $x \t
+.
+.
+}
+!endprocedure
+{SI
+  {
+    [] ファイル名1 | [] ファイル名2 | [] ファイル名3 | [] ファイル名4 | [] ファイル名5
+    _image(image1) |
+    _image(image2) |
+    _image(image3) |
+    _image(image4) |
+    _image(image5)
+    [] ファイル名6 | [] ファイル名7 | [] ファイル名8 | [] ファイル名9 | [] ファイル名10
+    _image(image6) |
+    _image(image7) |
+    _image(image8) |
+    _image(image9) |
+    _image(image10)
+    [] ファイル名11 | [] ファイル名12 | [] ファイル名13 | [] ファイル名14 | [] ファイル名15
+    _image(image11) |
+    _image(image12) |
+    _image(image13) |
+    _image(image14) |
+    _image(image15)
+    [] ファイル名16 | [] ファイル名17 | [] ファイル名18 | [] ファイル名19 | [] ファイル名20
+    _image(image16) |
+    _image(image17) |
+    _image(image18) |
+    _image(image19) |
+    _image(image20)
+    | -- | -- | \t\t<b>①</b>\t | -- | -- 
+  } |
+  {
+    108 | . | ... <b>②</b>
+    [全チェック選択] | [全チェック解除] | ... <b>③</b>
+    "            " | [フォルダ作成] | ... <b>④</b>
+    {SI
+      フォルダ1
+      フォルダ2
+      フォルダ3
+      フォルダ4
+      フォルダ5
+      フォルダ6
+      フォルダ7
+      フォルダ8
+      フォルダ9
+      フォルダ10
+    } | . | ... <b>⑤</b>
+    [フォルダへ移動]
+  }
+}
+@enduml
