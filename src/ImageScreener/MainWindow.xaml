@@ -39,8 +39,8 @@
             </StackPanel>
             <!-- 移動先フォルダのリスト、［フォルダへ移動］ボタン -->
             <StackPanel Grid.Row="3">
-                <ListBox Width="170" Height="300" Margin="5" HorizontalAlignment="Left" />
-                <Button Content="フォルダへ移動" Width="80" Height="20" Margin="5" HorizontalAlignment="Left" />
+                <ListBox Name="SubFolderList" Loaded="SubFolderList_Loaded" SelectionMode="Single" Width="170" Height="300" Margin="5" HorizontalAlignment="Left" ScrollViewer.VerticalScrollBarVisibility="Auto" />
+                <Button Name="MoveImageToSelectedFolder" Click="MoveImageToSelectedFolder_Click" Content="フォルダへ移動" Width="80" Height="20" Margin="5" HorizontalAlignment="Left" />
             </StackPanel>
         </Grid>
     </Grid>
