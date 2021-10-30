@@ -1,9 +1,9 @@
-﻿<!DOCTYPE html><html><head>
+<!DOCTYPE html><html><head>
       <title>&#x8981;&#x6C42;&#x4ED5;&#x69D8;&#x66F8;v0.1.0</title>
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       
-      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.13.18/dist/katex.min.css">
+      <link rel="stylesheet" href="file:///c:\Users\Aki\.vscode\extensions\shd101wyy.markdown-preview-enhanced-0.6.0\node_modules\@shd101wyy\mume\dependencies\katex\katex.min.css">
       
       
       
@@ -268,7 +268,7 @@ pre[data-line] .line-highlight[data-end]:after {
 
 <p>&#x30D1;&#x30F3;&#x304F;&#x305A;&#x30EA;&#x30B9;&#x30C8;&#xFF1A;<a href="../index.html">&#x30C8;&#x30C3;&#x30D7;&#x30DA;&#x30FC;&#x30B8;</a> - &#x8981;&#x6C42;&#x4ED5;&#x69D8;&#x66F8; v0.1.0</p>
 <p>&#x66F4;&#x65B0;&#x8005;&#xFF1A;DNV825<br>
-&#x66F4;&#x65B0;&#x65E5;&#xFF1A;2021/10/30(Sat) 13:08</p>
+&#x66F4;&#x65B0;&#x65E5;&#xFF1A;2021/10/30(Sat) 14:13</p>
 <h2 class="mume-header" id="%E5%AE%9F%E7%8F%BE%E3%81%99%E3%82%8B%E6%A9%9F%E8%83%BD%E3%81%AE%E8%AA%AC%E6%98%8E">&#x5B9F;&#x73FE;&#x3059;&#x308B;&#x6A5F;&#x80FD;&#x306E;&#x8AAC;&#x660E;</h2>
 
 <ol>
@@ -318,6 +318,24 @@ pre[data-line] .line-highlight[data-end]:after {
 </tr>
 </tbody>
 </table>
+<h2 class="mume-header" id="%E8%A6%81%E6%B1%82%E3%82%92%E5%AE%9F%E7%8F%BE%E3%81%99%E3%82%8B%E3%81%9F%E3%82%81%E3%81%AE%E6%89%8B%E9%A0%86">&#x8981;&#x6C42;&#x3092;&#x5B9F;&#x73FE;&#x3059;&#x308B;&#x305F;&#x3081;&#x306E;&#x624B;&#x9806;</h2>
+
+<p>&#x4EE5;&#x4E0B;&#x306E;&#x624B;&#x9806;&#x3067;wpf&#x30D7;&#x30ED;&#x30B8;&#x30A7;&#x30AF;&#x30C8;&#x306E;&#x30C6;&#x30F3;&#x30D7;&#x30EC;&#x30FC;&#x30C8;&#x3092;&#x5229;&#x7528;&#x3057;&#x3001;&#x7A7A;&#x30A6;&#x30A3;&#x30F3;&#x30C9;&#x30A6;&#x3092;&#x4F5C;&#x6210;&#x3059;&#x308B;&#x3053;&#x3068;&#x304C;&#x3067;&#x304D;&#x308B;&#x3002;<br>
+&#x30C6;&#x30B9;&#x30C8;&#x30D7;&#x30ED;&#x30B8;&#x30A7;&#x30AF;&#x30C8;&#x3082;&#x4F5C;&#x6210;&#x3057;&#x3001;&#x5B9F;&#x884C;&#x3057;&#x3066;&#x3044;&#x308B;&#xFF08;&#x306A;&#x304A;&#x3001;&#x30C6;&#x30B9;&#x30C8;&#x306E;&#x4E2D;&#x8EAB;&#x306F;&#x7A7A;&#x3063;&#x307D;&#x306A;&#x306E;&#x3067;&#x5B9F;&#x884C;&#x3059;&#x308B;&#x610F;&#x5473;&#x306F;&#x306A;&#x3044;&#x3002;&#xFF09;</p>
+<ol>
+<li><code>dotnet new sln</code></li>
+<li><code>mkdir src</code></li>
+<li><code>pushd src</code></li>
+<li><code>dotnet new wpf -n ImageScreener</code></li>
+<li><code>popd</code></li>
+<li><code>dotnet sln ./ImageScreener.sln add ./src/ImageScreener/ImageScreener.csproj</code></li>
+<li><code>dotnet build</code></li>
+<li><code>mkdir test</code></li>
+<li><code>pushd test</code></li>
+<li><code>dotnet new mstest -n ImageScreener</code></li>
+<li><code>dotnet sln ./ImageScreener.sln add ./test/ImageScreener/ImageScreener.csproj</code></li>
+<li><code>dotnet test</code></li>
+</ol>
 
       </div>
       <div class="md-sidebar-toc"><ul>
@@ -325,6 +343,7 @@ pre[data-line] .line-highlight[data-end]:after {
 <ul>
 <li><a href="#%E5%AE%9F%E7%8F%BE%E3%81%99%E3%82%8B%E6%A9%9F%E8%83%BD%E3%81%AE%E8%AA%AC%E6%98%8E">&#x5B9F;&#x73FE;&#x3059;&#x308B;&#x6A5F;&#x80FD;&#x306E;&#x8AAC;&#x660E;</a></li>
 <li><a href="#%E5%AE%9F%E7%8F%BE%E3%81%99%E3%82%8B%E6%A9%9F%E8%83%BD%E3%81%AE%E8%A6%81%E6%B1%82">&#x5B9F;&#x73FE;&#x3059;&#x308B;&#x6A5F;&#x80FD;&#x306E;&#x8981;&#x6C42;</a></li>
+<li><a href="#%E8%A6%81%E6%B1%82%E3%82%92%E5%AE%9F%E7%8F%BE%E3%81%99%E3%82%8B%E3%81%9F%E3%82%81%E3%81%AE%E6%89%8B%E9%A0%86">&#x8981;&#x6C42;&#x3092;&#x5B9F;&#x73FE;&#x3059;&#x308B;&#x305F;&#x3081;&#x306E;&#x624B;&#x9806;</a></li>
 </ul>
 </li>
 </ul>
