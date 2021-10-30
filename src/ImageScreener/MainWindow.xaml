@@ -34,8 +34,8 @@
             </StackPanel>
             <!-- フォルダ名入力用テキストボックス、［フォルダ作成］ボタン -->
             <StackPanel Orientation="Horizontal" Grid.Row="2">
-                <TextBox Width="80" Height="20" Margin="5" />
-                <Button Content="フォルダ作成" Width="80" Height="20" Margin="5" />
+                <TextBox Name="NewFolderName" KeyDown="OnKeyDownHander" Width="80" Height="20" Margin="5" />
+                <Button Name="CreateNewFolder" Click="CreateNewFolder_Click" Content="フォルダ作成" Width="80" Height="20" Margin="5" />
             </StackPanel>
             <!-- 移動先フォルダのリスト、［フォルダへ移動］ボタン -->
             <StackPanel Grid.Row="3">

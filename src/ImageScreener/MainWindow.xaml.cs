@@ -24,5 +24,19 @@ namespace ImageScreener
         {
             InitializeComponent();
         }
+
+        private void OnKeyDownHander(object sender, KeyEventArgs eventArgs)
+        {
+            if (eventArgs.Key == Key.Return)
+            {
+                CreateNewFolder cnf = new CreateNewFolder();
+                cnf.Do(NewFolderName);
+            }
+        }
+        private void CreateNewFolder_Click(object sender, RoutedEventArgs eventArgs)
+        {
+            CreateNewFolder cnf = new CreateNewFolder();
+            cnf.Do(NewFolderName);
+        }
     }
 }
