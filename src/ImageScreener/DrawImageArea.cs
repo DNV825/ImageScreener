@@ -26,13 +26,16 @@ namespace ImageScreener
 
             return imagesCount;
         }
-        public void Do(Grid imageArea, TextBlock imageFilesCount, List<CheckBox> chexboxes)
+        public void Do(Grid imageArea, TextBlock imageFilesCount, List<CheckBox> checkboxes, List<FileStream> filestreams)
         {
             // カレントディレクトリに存在する画像の件数を表示する。
             imageFilesCount.Text = this.GetImagesCount().ToString();
 
-            // チェックボックスのクリア（画像を移動したのでチェックボックスリストを作り直す必要がある。）
-            chexboxes.Clear();
+            // チェックボックスリストのクリア（画像を移動したのでチェックボックスリストを作り直す必要がある。）
+            checkboxes.Clear();
+
+            // FileStreamリストのクリア。
+            filestreams.Clear();
 
             // ターゲット画像の描画を開始。
             string[] files = Directory.GetFiles(".", "*", SearchOption.TopDirectoryOnly);
@@ -70,21 +73,36 @@ namespace ImageScreener
                         // チェックボックスとイメージを縦並びのStackPanelとして追加する。
                         StackPanel targetImage = new StackPanel();
                         CheckBox chk = new CheckBox();
-                        Image img = new Image();
 
                         chk.Width = 100;
                         chk.Height = 15;
                         chk.Margin = new Thickness(5);
                         chk.Content = imageFileName.Replace(".\\","");
                         targetImage.Children.Add(chk);
-                        chexboxes.Add(chk);
+                        checkboxes.Add(chk);
+
+                        // https://ameblo.jp/dairy789/entry-11243771768.html
+                        // https://ameblo.jp/dairy789/entry-11304440424.html
+                        // https://stackoverflow.com/questions/6588974/get-imagesource-from-memorystream-in-c-sharp-wpf
+                        // https://dobon.net/vb/dotnet/graphics/drawpicture2.html
+                        Image img = new Image();
+                        BitmapImage bimg = new BitmapImage();
+                        FileStream fs = new FileStream(Path.GetFullPath(imageFileName).Replace("\\","/"), FileMode.Open, FileAccess.Read);
+                        filestreams.Add(fs); // 描画時点ではFileStreamを開いたままにする。［ファイルを移動］ボタン押下時に、すべてのストリームを閉じる。
+
+                        bimg.BeginInit();
+                        bimg.StreamSource = fs;
+                        bimg.DecodePixelWidth = 100;
+                        bimg.DecodePixelHeight = 100;
+                        bimg.EndInit();
 
                         img.MaxWidth = 100;
                         img.MaxHeight = 100;
                         img.MinWidth = 100;
                         img.MinHeight = 100;
                         img.Margin = new Thickness(5);
-                        img.Source = new BitmapImage(new Uri(Path.GetFullPath(imageFileName).Replace("\\","/")));
+                        img.Source = bimg;
+                        
                         targetImage.Children.Add(img);
 
                         currentTargetRow.Children.Add(targetImage);

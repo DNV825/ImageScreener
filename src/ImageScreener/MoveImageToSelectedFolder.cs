@@ -8,29 +8,46 @@ using System.Windows.Controls;
 namespace ImageScreener
 {
     /// <summary>
-    /// 新規フォルダ追加機能。
+    /// 選択した画像を指定したフォルダへ移動させる機能。
     /// </summary>
     public class MoveImageToSelectedFolder
     {
-        public void Do(ListBox subFolderesList, List<CheckBox> checkboxes, ListBox SubFolderesList)
+        public void Do(Grid imageArea, ListBox subFolderesList, List<CheckBox> checkboxes, List<FileStream> filestreams)
         {
-            if(subFolderesList.SelectedItems.Count > 0)
+            // チェックボックスがチェックされているか確認する。
+            // checkboxesを2回ループすることになるので効率が悪いが、とりあえず他に方法が思いつかない。
+            bool isCheckedExists = false;
+            foreach (CheckBox cb in checkboxes)
             {
-                StringBuilder sb = new StringBuilder();
+                if (cb.IsChecked == true)
+                {
+                    isCheckedExists = true;
+                    break;
+                }
+            }
 
-                foreach(CheckBox cb in checkboxes)
+            if (isCheckedExists == true)
+            {
+                // 表示中の画像のストリームを閉じる（閉じなければファイルを移動できない。）
+                foreach (FileStream fs in filestreams)
+                {
+                    fs.Close();
+                }
+
+                foreach (CheckBox cb in checkboxes)
                 {
                     if (cb.IsChecked == true)
                     {
-                        sb.AppendLine(cb.Content.ToString());
+                        isCheckedExists = true;
+                        File.Move($"./{cb.Content.ToString()}", $"./{subFolderesList.SelectedItem}/{cb.Content.ToString()}");
                     }
                 }
 
-                MessageBox.Show($".\\{subFolderesList.SelectedItem}\n{sb.ToString()}", "スタブ：リスト選択項目あり");
+                imageArea.Children.Clear();
             }
             else
             {
-                MessageBox.Show("", "スタブ：リスト選択項目なし");
+                MessageBox.Show("移動対象のファイルが選択されていません。\n移動対象ファイルをチェックし、再度［フォルダへ移動］ボタンを\n押下してください。", "移動対象ファイルを選択してください", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
         }
     }

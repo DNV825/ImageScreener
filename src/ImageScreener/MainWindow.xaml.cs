@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -29,13 +30,19 @@ namespace ImageScreener
         * チェックボックスの情報を保存するリスト。
         */
         List<CheckBox> _checkboxes = new List<CheckBox>();
+
+        /**
+        * イメージをオープンするFileStreamへの参照を保存するリスト。
+        */
+        List<FileStream> _filestreams = new List<FileStream>();
+
         /**
         * グリッド「ImageArea」ロード時の動作。
         */
         private void ImageArea_Loaded(object sender, RoutedEventArgs eventArgs)
         {
             DrawImageArea dia = new DrawImageArea();
-            dia.Do(ImageArea, ImageFilesCount, _checkboxes);
+            dia.Do(ImageArea, ImageFilesCount, _checkboxes, _filestreams);
         }
 
         /**
@@ -85,12 +92,13 @@ namespace ImageScreener
             if(SubFolderesList.SelectedItems.Count == 1)
             {
                 MoveImageToSelectedFolder misf = new MoveImageToSelectedFolder();
-                misf.Do(SubFolderesList, _checkboxes, SubFolderesList);
+                misf.Do(ImageArea, SubFolderesList, _checkboxes, _filestreams);
 
                 DrawImageArea dia = new DrawImageArea();
-                dia.Do(ImageArea, ImageFilesCount, _checkboxes);
+                dia.Do(ImageArea, ImageFilesCount, _checkboxes, _filestreams);
             }
-            else{
+            else
+            {
                 MessageBox.Show("移動先フォルダが選択されていません。\n移動先フォルダを選択し、再度［フォルダへ移動］ボタンを\n押下してください。", "移動先フォルダを選択してください", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
         }
