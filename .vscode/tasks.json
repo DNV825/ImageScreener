@@ -14,7 +14,15 @@
       "command": [
         "Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope Process;",
         ".\\.vscode\\KaTeX表現のcssをCDN参照に変更する.ps1 .\\*;"
-      ]
+      ],
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": true,
+        "panel": "shared",
+        "showReuseMessage": true,
+        "clear": false
+      }
     }
   ]
 }
