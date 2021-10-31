@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -10,11 +12,21 @@ namespace ImageScreener
     /// </summary>
     public class MoveImageToSelectedFolder
     {
-        public void Do(ListBox subFolderList)
+        public void Do(ListBox subFolderesList, List<CheckBox> checkboxes, ListBox SubFolderesList)
         {
-            if(subFolderList.SelectedItems.Count > 0)
+            if(subFolderesList.SelectedItems.Count > 0)
             {
-                MessageBox.Show($".\\{subFolderList.SelectedItem}", "スタブ：リスト選択項目あり");
+                StringBuilder sb = new StringBuilder();
+
+                foreach(CheckBox cb in checkboxes)
+                {
+                    if (cb.IsChecked == true)
+                    {
+                        sb.AppendLine(cb.Content.ToString());
+                    }
+                }
+
+                MessageBox.Show($".\\{subFolderesList.SelectedItem}\n{sb.ToString()}", "スタブ：リスト選択項目あり");
             }
             else
             {

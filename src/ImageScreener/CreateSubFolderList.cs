@@ -8,20 +8,20 @@ namespace ImageScreener
     /// <summary>
     /// 新規フォルダ追加機能。
     /// </summary>
-    public class CreateSubFolderList
+    public class CreateSubFolderesList
     {
-        public void Do(ListBox subFolderList)
+        public void Do(ListBox subFolderesList)
         {
-            String[] dirs = Directory.GetDirectories(".", "*", SearchOption.TopDirectoryOnly);
+            string[] dirs = Directory.GetDirectories(".", "*", SearchOption.TopDirectoryOnly);
 
-            if(subFolderList.Items.Count > 0)
+            if(subFolderesList.Items.Count > 0)
             {
-                subFolderList.Items.Clear();
+                subFolderesList.Items.Clear();
             }
 
-            foreach(String subFolderName in dirs)
+            foreach(string subFolderName in dirs)
             {
-                subFolderList.Items.Add(subFolderName.Replace(".\\", ""));
+                subFolderesList.Items.Add(subFolderName.Replace(".\\", ""));
             }
         }
     }

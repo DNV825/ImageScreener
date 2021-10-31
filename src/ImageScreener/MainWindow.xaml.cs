@@ -26,6 +26,19 @@ namespace ImageScreener
         }
 
         /**
+        * チェックボックスの情報を保存するリスト。
+        */
+        List<CheckBox> _checkboxes = new List<CheckBox>();
+        /**
+        * グリッド「ImageArea」ロード時の動作。
+        */
+        private void ImageArea_Loaded(object sender, RoutedEventArgs eventArgs)
+        {
+            DrawImageArea dia = new DrawImageArea();
+            dia.Do(ImageArea, ImageFilesCount, _checkboxes);
+        }
+
+        /**
         * テキストボックス「NewFolderName」でエンターキーを押下した場合の動作。
         * 動作内容は［フォルダ作成］ボタン押下時と同様。
         */
@@ -36,8 +49,8 @@ namespace ImageScreener
                 CreateNewFolder cnf = new CreateNewFolder();
                 cnf.Do(NewFolderName);
 
-                CreateSubFolderList csfl = new CreateSubFolderList();
-                csfl.Do(SubFolderList);
+                CreateSubFolderesList csfl = new CreateSubFolderesList();
+                csfl.Do(SubFolderesList);
             }
         }
 
@@ -49,17 +62,17 @@ namespace ImageScreener
             CreateNewFolder cnf = new CreateNewFolder();
             cnf.Do(NewFolderName);
 
-            CreateSubFolderList csfl = new CreateSubFolderList();
-            csfl.Do(SubFolderList);
+            CreateSubFolderesList csfl = new CreateSubFolderesList();
+            csfl.Do(SubFolderesList);
         }
 
         /**
-        * リストボックス「SubFolderList」ロード時の動作。
+        * リストボックス「SubFolderesList」ロード時の動作。
         */
-        private void SubFolderList_Loaded(object sender, RoutedEventArgs eventArgs)
+        private void SubFolderesList_Loaded(object sender, RoutedEventArgs eventArgs)
         {
-            CreateSubFolderList csfl = new CreateSubFolderList();
-            csfl.Do(SubFolderList);
+            CreateSubFolderesList csfl = new CreateSubFolderesList();
+            csfl.Do(SubFolderesList);
         }
 
         /**
@@ -67,9 +80,19 @@ namespace ImageScreener
         */
         private void MoveImageToSelectedFolder_Click(object sender, RoutedEventArgs eventArgs)
         {
-            MoveImageToSelectedFolder misf = new MoveImageToSelectedFolder();
-            misf.Do(SubFolderList);
-        }
+            // 移動先フォルダが選択されている場合、選択したファイルを移動し、
+            // ターゲット画像を再描画する。
+            if(SubFolderesList.SelectedItems.Count == 1)
+            {
+                MoveImageToSelectedFolder misf = new MoveImageToSelectedFolder();
+                misf.Do(SubFolderesList, _checkboxes, SubFolderesList);
 
+                DrawImageArea dia = new DrawImageArea();
+                dia.Do(ImageArea, ImageFilesCount, _checkboxes);
+            }
+            else{
+                MessageBox.Show("移動先フォルダが選択されていません。\n移動先フォルダを選択し、再度［フォルダへ移動］ボタンを\n押下してください。", "移動先フォルダを選択してください", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+        }
     }
 }
