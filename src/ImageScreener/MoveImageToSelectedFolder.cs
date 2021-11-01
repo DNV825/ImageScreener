@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
@@ -29,10 +30,14 @@ namespace ImageScreener
             if (isCheckedExists == true)
             {
                 // 表示中の画像のストリームを閉じる（閉じなければファイルを移動できない。）
+                // https://divakk.co.jp/aoyagi/csharp_tips_using.html
                 foreach (FileStream fs in filestreams)
                 {
                     fs.Close();
+                    fs.Dispose();
                 }
+
+                Task.Delay(200);  // ストリームを閉じてもファイルへの接続が維持されているようなので、試しに200ms待機して完全なクローズを待ってみる。
 
                 foreach (CheckBox cb in checkboxes)
                 {

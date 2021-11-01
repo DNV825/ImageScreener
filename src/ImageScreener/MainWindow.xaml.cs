@@ -45,6 +45,29 @@ namespace ImageScreener
             dia.Do(ImageArea, ImageFilesCount, _checkboxes, _filestreams);
         }
 
+
+        /**
+        * ［全チェック選択］ボタン押下時の動作。
+        */
+        private void CheckOnAll_Click(object sender, RoutedEventArgs eventArgs)
+        {
+            foreach (CheckBox cb in _checkboxes)
+            {
+                cb.IsChecked = true;
+            }
+        }
+
+        /**
+        * ［全チェック解除］ボタン押下時の動作。
+        */
+        private void CheckOffAll_Click(object sender, RoutedEventArgs eventArgs)
+        {
+            foreach (CheckBox cb in _checkboxes)
+            {
+                cb.IsChecked = false;
+            }
+        }
+
         /**
         * テキストボックス「NewFolderName」でエンターキーを押下した場合の動作。
         * 動作内容は［フォルダ作成］ボタン押下時と同様。
@@ -87,19 +110,39 @@ namespace ImageScreener
         */
         private void MoveImageToSelectedFolder_Click(object sender, RoutedEventArgs eventArgs)
         {
-            // 移動先フォルダが選択されている場合、選択したファイルを移動し、
-            // ターゲット画像を再描画する。
-            if(SubFolderesList.SelectedItems.Count == 1)
+            // チェックボックスがチェックされているか確認する。
+            // checkboxesを2回ループすることになるので効率が悪いが、とりあえず他に方法が思いつかない。
+            bool isCheckedExists = false;
+            foreach (CheckBox cb in _checkboxes)
             {
-                MoveImageToSelectedFolder misf = new MoveImageToSelectedFolder();
-                misf.Do(ImageArea, SubFolderesList, _checkboxes, _filestreams);
+                if (cb.IsChecked == true)
+                {
+                    isCheckedExists = true;
+                    break;
+                }
+            }
 
-                DrawImageArea dia = new DrawImageArea();
-                dia.Do(ImageArea, ImageFilesCount, _checkboxes, _filestreams);
+            // チェックボックスがチェックされている場合。
+            if (isCheckedExists == true)
+            {
+                // 移動先フォルダが選択されている場合、選択したファイルを移動し、
+                // ターゲット画像を再描画する。
+                if(SubFolderesList.SelectedItems.Count == 1)
+                {
+                    MoveImageToSelectedFolder misf = new MoveImageToSelectedFolder();
+                    misf.Do(ImageArea, SubFolderesList, _checkboxes, _filestreams);
+
+                    DrawImageArea dia = new DrawImageArea();
+                    dia.Do(ImageArea, ImageFilesCount, _checkboxes, _filestreams);
+                }
+                else
+                {
+                    MessageBox.Show("移動先フォルダが選択されていません。\n移動先フォルダを選択し、再度［フォルダへ移動］ボタンを\n押下してください。", "移動先フォルダを選択してください", MessageBoxButton.OK, MessageBoxImage.Warning);
+                }
             }
             else
             {
-                MessageBox.Show("移動先フォルダが選択されていません。\n移動先フォルダを選択し、再度［フォルダへ移動］ボタンを\n押下してください。", "移動先フォルダを選択してください", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show("移動対象のファイルが選択されていません。\n移動対象ファイルをチェックし、再度［フォルダへ移動］ボタンを\n押下してください。", "移動対象ファイルを選択してください", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
         }
     }

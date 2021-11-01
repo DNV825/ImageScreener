@@ -53,8 +53,8 @@
             <TextBlock Name="ImageFilesCount" Text="0" FontSize="20" Margin="5" Grid.Row="0" />
             <!-- ［全チェック選択］ボタン、［全チェック解除］ボタン -->
             <StackPanel Orientation="Horizontal" Grid.Row="1">
-                <Button Content="全チェック選択" Width="80" Height="20" Margin="5" />
-                <Button Content="全チェック解除" Width="80" Height="20" Margin="5" />
+                <Button Name="CheckOnAll" Content="全チェック選択" Click="CheckOnAll_Click" Width="80" Height="20" Margin="5" />
+                <Button Name="CheckOffAll" Content="全チェック解除" Click="CheckOffAll_Click" Width="80" Height="20" Margin="5" />
             </StackPanel>
             <!-- フォルダ名入力用テキストボックス、［フォルダ作成］ボタン -->
             <StackPanel Orientation="Horizontal" Grid.Row="2">
