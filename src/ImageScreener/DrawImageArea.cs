@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Diagnostics;
 using System.Windows;
+using System.Windows.Input;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
 
@@ -12,6 +14,18 @@ namespace ImageScreener
     /// </summary>
     public class DrawImageArea
     {
+        /**
+        * 描画した画像クリック時の動作。
+        */
+        private void Image_Click(object sender, RoutedEventArgs eventArgs)
+        {
+            Image img = (Image)sender;
+            string imagePath = img.Tag.ToString().Replace("\\", "/");
+            Process.Start(@"cmd.exe", $"/c {imagePath}");
+        }
+// "C:/workspace/development/project/ImageScreener/src/ImageScreener/129.jpg"
+// 型 'System.ComponentModel.Win32Exception' のハンドルされていない例外が System.Diagnostics.Process.dll で発生しました:
+//  'The specified executable is not a valid application for this OS platform.'
         /**
         * カレントディレクトリに存在するターゲット画像の枚数を返却する。
         */
@@ -87,7 +101,8 @@ namespace ImageScreener
                         // https://dobon.net/vb/dotnet/graphics/drawpicture2.html
                         Image img = new Image();
                         BitmapImage bimg = new BitmapImage();
-                        FileStream fs = new FileStream(Path.GetFullPath(imageFileName).Replace("\\","/"), FileMode.Open, FileAccess.Read);
+                        string imagePath = Path.GetFullPath(imageFileName).Replace("\\","/");
+                        FileStream fs = new FileStream(imagePath, FileMode.Open, FileAccess.Read);
                         filestreams.Add(fs); // 描画時点ではFileStreamを開いたままにする。［ファイルを移動］ボタン押下時に、すべてのストリームを閉じる。
 
                         bimg.BeginInit();
@@ -102,7 +117,9 @@ namespace ImageScreener
                         img.MinHeight = 100;
                         img.Margin = new Thickness(5);
                         img.Source = bimg;
-                        
+                        img.MouseDown += new MouseButtonEventHandler(Image_Click);
+                        img.Tag = imagePath;
+                        // img.ToolTip = imagePath;
                         targetImage.Children.Add(img);
 
                         currentTargetRow.Children.Add(targetImage);

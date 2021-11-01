@@ -45,7 +45,6 @@ namespace ImageScreener
             dia.Do(ImageArea, ImageFilesCount, _checkboxes, _filestreams);
         }
 
-
         /**
         * ［全チェック選択］ボタン押下時の動作。
         */
