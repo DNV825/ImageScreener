@@ -1,0 +1,7 @@
+要求番号,分類,内容
+1,要求,表示している画像をクリックすると、OSに設定されたアプリで元画像を表示すること。
+,理由,通常のビルドだと複数のdllファイルが必要になり、exeファイルを自由に移動できないため。
+,説明,カレントディレクトリの画像ファイルを移動させるアプリなので、exeファイル単体で移動できなければ不便。<br>以下の方法で実現できるらしい。<ul><li><https://qiita.com/skitoy4321/items/e8a43881456edc1f2c61></li><li><https://docs.microsoft.com/ja-jp/dotnet/core/tools/dotnet-publish></li><li><https://docs.microsoft.com/ja-jp/dotnet/core/rid-catalog></li><li><https://docs.microsoft.com/ja-jp/dotnet/core/deploying/runtime-patch-selection></li><li><https://docs.microsoft.com/ja-jp/dotnet/core/project-sdk/msbuild-props#runtimeidentifiers></li><li><https://devadjust.exblog.jp/27784413/></li></ul>
+2,要求,ファイルの移動実行時にターゲット画像と同名のファイルが移動先フォルダに存在する場合、ターゲット画像名の末尾に"="を付与してファイルを移動すること。
+,理由,現行の実装ではエラーが発生してアプリが終了してしまうため。
+,説明,例えば、"abcd.jpg"は"abcd=.jpg"として移動する。"abcd=.jpg"と同じ名前のファイルがある場合は"abcd==.jpg"のように"="の数を増やす。
