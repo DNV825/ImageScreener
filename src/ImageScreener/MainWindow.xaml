@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:ImageScreener"
         mc:Ignorable="d"
         Title="ふるいわけ" Height="600" Width="800"
-        Icon="img/icon64x64a.ico">
+        Icon="img/icon32x32a.ico">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="580" />
