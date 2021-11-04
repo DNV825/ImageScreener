@@ -3,9 +3,19 @@
     <OutputType>WinExe</OutputType>
     <TargetFramework>net5.0-windows</TargetFramework>
     <UseWPF>true</UseWPF>
-    <!-- 以下の3行を追記する。ただし、通常のデバッグ時にはコメントアウトすること。 -->
-    <PublishSingleFile>true</PublishSingleFile>
-    <SelfContained>false</SelfContained>
-    <RuntimeIdentifier>win-x64</RuntimeIdentifier>
+    <!-- 以下の3行で発行（publish）時に単一のexeファイル出力にできる。ただし、通常のデバッグ時にはコメントアウトすること。 -->
+    <!-- <PublishSingleFile>true</PublishSingleFile> -->
+    <!-- <SelfContained>false</SelfContained> -->
+    <!-- <RuntimeIdentifier>win-x64</RuntimeIdentifier> -->
+    <!-- exeファイルのアイコンを指定する。 -->
+    <ApplicationIcon>img/icon64x64a.ico</ApplicationIcon>
   </PropertyGroup>
+  <!-- ビルド後にファイルを出力しない、という設定。これを書かないと相対パスが認識されない。 -->
+  <ItemGroup>
+    <None Remove="img/icon64x64a.ico" />
+  </ItemGroup>
+  <!-- 埋め込みリソースとする指示。 -->
+  <ItemGroup>
+    <EmbeddedResource Include="img/icon64x64a.ico" />
+  </ItemGroup>
 </Project>
