@@ -268,7 +268,7 @@ pre[data-line] .line-highlight[data-end]:after {
 
 <p>&#x30D1;&#x30F3;&#x304F;&#x305A;&#x30EA;&#x30B9;&#x30C8;&#xFF1A;<a href="../index.html">&#x30C8;&#x30C3;&#x30D7;&#x30DA;&#x30FC;&#x30B8;</a> - &#x8981;&#x6C42;&#x4ED5;&#x69D8;&#x66F8; v1.0.0</p>
 <p>&#x66F4;&#x65B0;&#x8005;&#xFF1A;DNV825<br>
-&#x66F4;&#x65B0;&#x65E5;&#xFF1A;2021/11/04(Thu) 22:36</p>
+&#x66F4;&#x65B0;&#x65E5;&#xFF1A;2021/11/05(Fri) 00:24</p>
 <h2 class="mume-header" id="%E5%AE%9F%E7%8F%BE%E3%81%99%E3%82%8B%E6%A9%9F%E8%83%BD%E3%81%AE%E8%AA%AC%E6%98%8E">&#x5B9F;&#x73FE;&#x3059;&#x308B;&#x6A5F;&#x80FD;&#x306E;&#x8AAC;&#x660E;</h2>
 
 <ol>
@@ -311,7 +311,13 @@ pre[data-line] .line-highlight[data-end]:after {
 <li>NONE&#x30BF;&#x30B0;&#x306E;&#x5B58;&#x5728;&#x304C;&#x308F;&#x304B;&#x3089;&#x306A;&#x304B;&#x3063;&#x305F;&#x306E;&#x3060;&#x304C;&#x3001;&#x3069;&#x3053;&#x304B;&#x3067;&#x8AAD;&#x3093;&#x3060;&#x6C17;&#x304C;&#x3059;&#x308B;&#x2026;&#x3002;</li>
 </ol>
 </li>
-<li>&#x30A2;&#x30A4;&#x30B3;&#x30F3;&#x306F; <a href="https://ao-system.net/alphaicon/">https://ao-system.net/alphaicon/</a> &#x3067;&#x4F5C;&#x6210;&#x3057;&#x305F;&#x3002;</li>
+<li>&#x30A2;&#x30A4;&#x30B3;&#x30F3;&#x306F; <a href="https://ao-system.net/alphaicon/">https://ao-system.net/alphaicon/</a> &#x3067;&#x4F5C;&#x6210;&#x3057;&#x305F;&#x3002;
+<ol>
+<li>&#x30A2;&#x30A4;&#x30B3;&#x30F3;&#x533A;&#x5207;&#x308A;&#x306F;<code>\\</code>&#x51FA;&#x306A;&#x3044;&#x3068;&#x30C0;&#x30E1;&#x3002;<code>/</code>&#x3060;&#x3068;&#x30D5;&#x30A1;&#x30A4;&#x30EB;&#x304C;&#x898B;&#x3064;&#x304B;&#x3089;&#x306A;&#x3044;&#x3068;&#x3044;&#x3046;&#x30A8;&#x30E9;&#x30FC;&#x306B;&#x306A;&#x308B;&#x3002;</li>
+<li>&#x3053;&#x306E;&#x3053;&#x3068;&#x306B;&#x6C17;&#x3065;&#x304F;&#x306E;&#x306B;&#x4E38;1&#x65E5;&#x304B;&#x304B;&#x3063;&#x305F;&#x3002;</li>
+<li>MainWindow.xaml&#x306E;Icon&#x6307;&#x5B9A;&#x306F;&#x4E0D;&#x8981;&#x3002;ApplicationIcon&#x3067;&#x30A6;&#x30A3;&#x30F3;&#x30C9;&#x30A6;&#x5DE6;&#x4E0A;&#x306E;&#x30A2;&#x30A4;&#x30B3;&#x30F3;&#x306B;&#x3082;&#x53CD;&#x6620;&#x3055;&#x308C;&#x308B;&#x3002;</li>
+</ol>
+</li>
 </ol>
 <pre data-role="codeBlock" data-info="xml" class="language-xml"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>Project</span> <span class="token attr-name">Sdk</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>Microsoft.NET.Sdk<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
   <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>PropertyGroup</span><span class="token punctuation">&gt;</span></span>
@@ -322,18 +328,18 @@ pre[data-line] .line-highlight[data-end]:after {
     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>PublishSingleFile</span><span class="token punctuation">&gt;</span></span>true<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>PublishSingleFile</span><span class="token punctuation">&gt;</span></span>
     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>SelfContained</span><span class="token punctuation">&gt;</span></span>false<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>SelfContained</span><span class="token punctuation">&gt;</span></span>
     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>RuntimeIdentifier</span><span class="token punctuation">&gt;</span></span>win-x64<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>RuntimeIdentifier</span><span class="token punctuation">&gt;</span></span>
-    <span class="token comment">&lt;!-- exe&#x30D5;&#x30A1;&#x30A4;&#x30EB;&#x306E;&#x30A2;&#x30A4;&#x30B3;&#x30F3;&#x3092;&#x6307;&#x5B9A;&#x3059;&#x308B;&#x3002; --&gt;</span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>ApplicationIcon</span><span class="token punctuation">&gt;</span></span>img/icon32x32a.ico<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>ApplicationIcon</span><span class="token punctuation">&gt;</span></span>
+    <span class="token comment">&lt;!-- exe&#x30D5;&#x30A1;&#x30A4;&#x30EB;&#x306E;&#x30A2;&#x30A4;&#x30B3;&#x30F3;&#x3092;&#x6307;&#x5B9A;&#x3059;&#x308B;&#x3002;&apos;/&apos;&#x3067;&#x30D5;&#x30A9;&#x30EB;&#x30C0;&#x3092;&#x533A;&#x5207;&#x308B;&#x3068;&#x30C0;&#x30E1;&#x3002; --&gt;</span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>ApplicationIcon</span><span class="token punctuation">&gt;</span></span>img\icon32x32a.ico<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>ApplicationIcon</span><span class="token punctuation">&gt;</span></span>
   <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>PropertyGroup</span><span class="token punctuation">&gt;</span></span>
   
   <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>ItemGroup</span><span class="token punctuation">&gt;</span></span>
     <span class="token comment">&lt;!-- &#x30D3;&#x30EB;&#x30C9;&#x5F8C;&#x306B;&#x30D5;&#x30A1;&#x30A4;&#x30EB;&#x3092;&#x51FA;&#x529B;&#x3057;&#x306A;&#x3044;&#x3001;&#x3068;&#x3044;&#x3046;&#x8A2D;&#x5B9A;&#x3002;&#x3053;&#x308C;&#x3092;&#x66F8;&#x304B;&#x306A;&#x3044;&#x3068;&#x76F8;&#x5BFE;&#x30D1;&#x30B9;&#x304C;&#x8A8D;&#x8B58;&#x3055;&#x308C;&#x306A;&#x3044;&#x3002; --&gt;</span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>None</span> <span class="token attr-name">Remove</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>img/icon32x32a.ico<span class="token punctuation">&quot;</span></span> <span class="token punctuation">/&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>None</span> <span class="token attr-name">Remove</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>img\icon32x32a.ico<span class="token punctuation">&quot;</span></span> <span class="token punctuation">/&gt;</span></span>
   <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>ItemGroup</span><span class="token punctuation">&gt;</span></span>
 
   <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>ItemGroup</span><span class="token punctuation">&gt;</span></span>
     <span class="token comment">&lt;!-- &#x57CB;&#x3081;&#x8FBC;&#x307F;&#x30EA;&#x30BD;&#x30FC;&#x30B9;&#x3068;&#x3059;&#x308B;&#x6307;&#x793A;&#x3002; --&gt;</span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>EmbeddedResource</span> <span class="token attr-name">Include</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>img/icon32x32a.ico<span class="token punctuation">&quot;</span></span> <span class="token punctuation">/&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>EmbeddedResource</span> <span class="token attr-name">Include</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>img\icon32x32a.ico<span class="token punctuation">&quot;</span></span> <span class="token punctuation">/&gt;</span></span>
   <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>ItemGroup</span><span class="token punctuation">&gt;</span></span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>Project</span><span class="token punctuation">&gt;</span></span>
 </pre><p>&#x53C2;&#x8003;&#x30B5;&#x30A4;&#x30C8;&#xFF1A;<br>

@@ -5,8 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ImageScreener"
         mc:Ignorable="d"
-        Title="ふるいわけ" Height="600" Width="800"
-        Icon="img/icon32x32a.ico">
+        Title="ふるいわけ" Height="600" Width="800">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="580" />
