@@ -10,11 +10,11 @@ namespace ImageScreener
     /// </summary>
     public class CreateNewFolder
     {
-        public void Do(TextBox newFolderName)
+        public void Do(TextBox newFolderName, string currentDirectoryPath)
         {
             try
             {
-                Directory.CreateDirectory(newFolderName.Text);
+                Directory.CreateDirectory($"{currentDirectoryPath}/{newFolderName.Text}");
                 newFolderName.Text = "";
             }
             catch (Exception e)

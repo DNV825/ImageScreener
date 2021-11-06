@@ -24,6 +24,7 @@ namespace ImageScreener
         public MainWindow()
         {
             InitializeComponent();
+            _currentDirectoryPath = System.IO.Path.GetFullPath(".");
         }
 
         /**
@@ -37,12 +38,17 @@ namespace ImageScreener
         List<FileStream> _filestreams = new List<FileStream>();
 
         /**
+        * 画像表示中のカレントディレクトリのパス。
+        */
+        string _currentDirectoryPath = ".";
+
+        /**
         * グリッド「ImageArea」ロード時の動作。
         */
         private void ImageArea_Loaded(object sender, RoutedEventArgs eventArgs)
         {
             DrawImageArea dia = new DrawImageArea();
-            dia.Do(ImageArea, ImageFilesCount, _checkboxes, _filestreams);
+            dia.Do(ImageArea, ImageFilesCount, _checkboxes, _filestreams, _currentDirectoryPath, DisplayArea);
         }
 
         /**
@@ -76,10 +82,10 @@ namespace ImageScreener
             if (eventArgs.Key == Key.Return)
             {
                 CreateNewFolder cnf = new CreateNewFolder();
-                cnf.Do(NewFolderName);
+                cnf.Do(NewFolderName, _currentDirectoryPath);
 
                 CreateSubFolderesList csfl = new CreateSubFolderesList();
-                csfl.Do(SubFolderesList);
+                csfl.Do(SubFolderesList, _currentDirectoryPath);
             }
         }
 
@@ -89,10 +95,10 @@ namespace ImageScreener
         private void CreateNewFolder_Click(object sender, RoutedEventArgs eventArgs)
         {
             CreateNewFolder cnf = new CreateNewFolder();
-            cnf.Do(NewFolderName);
+            cnf.Do(NewFolderName, _currentDirectoryPath);
 
             CreateSubFolderesList csfl = new CreateSubFolderesList();
-            csfl.Do(SubFolderesList);
+            csfl.Do(SubFolderesList, _currentDirectoryPath);
         }
 
         /**
@@ -101,7 +107,22 @@ namespace ImageScreener
         private void SubFolderesList_Loaded(object sender, RoutedEventArgs eventArgs)
         {
             CreateSubFolderesList csfl = new CreateSubFolderesList();
-            csfl.Do(SubFolderesList);
+            csfl.Do(SubFolderesList, _currentDirectoryPath);
+        }
+
+        /**
+        * リストボックス「SubFolderesList」のアイテムをダブルクリックした時の動作。
+        */
+        private void SubFolderesList_MouseDoubleClick(object sender, RoutedEventArgs eventArgs)
+        {
+            ChangeCurrentDirectory ccd = new ChangeCurrentDirectory();
+            _currentDirectoryPath = ccd.GetNewCurrentDirectoryPath(SubFolderesList, _currentDirectoryPath);
+
+            CreateSubFolderesList csfl = new CreateSubFolderesList();
+            csfl.Do(SubFolderesList, _currentDirectoryPath);
+
+            DrawImageArea dia = new DrawImageArea();
+            dia.Do(ImageArea, ImageFilesCount, _checkboxes, _filestreams, _currentDirectoryPath, DisplayArea);
         }
 
         /**
@@ -129,10 +150,10 @@ namespace ImageScreener
                 if(SubFolderesList.SelectedItems.Count == 1)
                 {
                     MoveImageToSelectedFolder misf = new MoveImageToSelectedFolder();
-                    misf.Do(ImageArea, SubFolderesList, _checkboxes, _filestreams);
+                    misf.Do(ImageArea, SubFolderesList, _checkboxes, _filestreams, _currentDirectoryPath);
 
                     DrawImageArea dia = new DrawImageArea();
-                    dia.Do(ImageArea, ImageFilesCount, _checkboxes, _filestreams);
+                    dia.Do(ImageArea, ImageFilesCount, _checkboxes, _filestreams, _currentDirectoryPath, DisplayArea);
                 }
                 else
                 {

@@ -20,45 +20,57 @@ namespace ImageScreener
         private void Image_Click(object sender, RoutedEventArgs eventArgs)
         {
             Image img = (Image)sender;
-            string imagePath = img.Tag.ToString().Replace("\\", "/");
-            Process.Start(@"cmd.exe", $"/c {imagePath}");
+            string imagePath = img.Tag.ToString();
+
+            // https://docs.microsoft.com/en-us/dotnet/api/system.diagnostics.processstartinfo.createnowindow?redirectedfrom=MSDN&view=net-5.0#System_Diagnostics_ProcessStartInfo_CreateNoWindow
+            // https://stackoverflow.com/questions/5377423/hide-console-window-from-process-start-c-sharp
+            Process cmd = new Process();
+            cmd.StartInfo.UseShellExecute = false;
+            cmd.StartInfo.CreateNoWindow = true;
+            cmd.StartInfo.FileName = "cmd.exe";
+            cmd.StartInfo.Arguments = $"/c {imagePath}";
+            cmd.Start();
         }
-// "C:/workspace/development/project/ImageScreener/src/ImageScreener/129.jpg"
-// 型 'System.ComponentModel.Win32Exception' のハンドルされていない例外が System.Diagnostics.Process.dll で発生しました:
-//  'The specified executable is not a valid application for this OS platform.'
+
         /**
         * カレントディレクトリに存在するターゲット画像の枚数を返却する。
         */
-        private int GetImagesCount()
+        private int GetImagesCount(string currentDirectoryPath)
         {
             int imagesCount = 0;
 
-            imagesCount += Directory.GetFiles(".", "*.jpg", SearchOption.TopDirectoryOnly).GetLength(0);
-            imagesCount += Directory.GetFiles(".", "*.jpeg", SearchOption.TopDirectoryOnly).GetLength(0);
-            imagesCount += Directory.GetFiles(".", "*.png", SearchOption.TopDirectoryOnly).GetLength(0);
-            imagesCount += Directory.GetFiles(".", "*.gif", SearchOption.TopDirectoryOnly).GetLength(0);
+            imagesCount += Directory.GetFiles(currentDirectoryPath, "*.jpg", SearchOption.TopDirectoryOnly).GetLength(0);
+            imagesCount += Directory.GetFiles(currentDirectoryPath, "*.jpeg", SearchOption.TopDirectoryOnly).GetLength(0);
+            imagesCount += Directory.GetFiles(currentDirectoryPath, "*.png", SearchOption.TopDirectoryOnly).GetLength(0);
+            imagesCount += Directory.GetFiles(currentDirectoryPath, "*.gif", SearchOption.TopDirectoryOnly).GetLength(0);
 
             return imagesCount;
         }
-        public void Do(Grid imageArea, TextBlock imageFilesCount, List<CheckBox> checkboxes, List<FileStream> filestreams)
+
+        /**
+        * ImageAreaにカレントディレクトリの画像ファイルを描画する。
+        */
+        public void Do(Grid imageArea, TextBlock imageFilesCount, List<CheckBox> checkboxes, List<FileStream> filestreams, string currentDirectoryPath, Grid displayArea)
         {
             // カレントディレクトリに存在する画像の件数を表示する。
-            imageFilesCount.Text = this.GetImagesCount().ToString();
+            imageFilesCount.Text = this.GetImagesCount(currentDirectoryPath).ToString();
 
             // チェックボックスリストのクリア（画像を移動したのでチェックボックスリストを作り直す必要がある。）
             checkboxes.Clear();
 
-            // FileStreamリストのクリア。
+            // 開いているファイルのFileStreamを閉じ、リストをクリアする。
+            foreach (FileStream fs in filestreams)
+            {
+                fs.Close();
+                fs.Dispose();
+            }
             filestreams.Clear();
 
+            // ImageAreaをクリア（初期化）する。
+            imageArea.Children.Clear();
+
             // ターゲット画像の描画を開始。
-            string[] files = Directory.GetFiles(".", "*", SearchOption.TopDirectoryOnly);
-
-            if(imageArea.Children.Count > 0)
-            {
-                imageArea.Children.Clear();
-            }
-
+            string[] files = Directory.GetFiles(currentDirectoryPath, "*", SearchOption.TopDirectoryOnly);
             int targetImagesCount = 0;                      // ターゲット行に描画中のターゲット画像の件数。
             int rowCount = 0;                               // Grid.Rowのカウント。
             StackPanel currentTargetRow = new StackPanel(); // 現在のターゲット行を指し示す変数。
@@ -91,7 +103,7 @@ namespace ImageScreener
                         chk.Width = 100;
                         chk.Height = 15;
                         chk.Margin = new Thickness(5);
-                        chk.Content = imageFileName.Replace(".\\","");
+                        chk.Content = Path.GetFullPath(imageFileName).Replace($"{currentDirectoryPath}","").Replace("\\",""); // チェックボックスにはファイル名だけを表示する。
                         targetImage.Children.Add(chk);
                         checkboxes.Add(chk);
 
@@ -101,7 +113,7 @@ namespace ImageScreener
                         // https://dobon.net/vb/dotnet/graphics/drawpicture2.html
                         Image img = new Image();
                         BitmapImage bimg = new BitmapImage();
-                        string imagePath = Path.GetFullPath(imageFileName).Replace("\\","/");
+                        string imagePath = Path.GetFullPath(imageFileName);
                         FileStream fs = new FileStream(imagePath, FileMode.Open, FileAccess.Read);
                         filestreams.Add(fs); // 描画時点ではFileStreamを開いたままにする。［ファイルを移動］ボタン押下時に、すべてのストリームを閉じる。
 

@@ -13,7 +13,7 @@ namespace ImageScreener
     /// </summary>
     public class MoveImageToSelectedFolder
     {
-        public void Do(Grid imageArea, ListBox subFolderesList, List<CheckBox> checkboxes, List<FileStream> filestreams)
+        public void Do(Grid imageArea, ListBox subFolderesList, List<CheckBox> checkboxes, List<FileStream> filestreams, string currentDirectoryPath)
         {
             // チェックボックスがチェックされているか確認する。
             // checkboxesを2回ループすることになるので効率が悪いが、とりあえず他に方法が思いつかない。
@@ -48,16 +48,20 @@ namespace ImageScreener
 
                         // 同名のファイルが移動先に存在している場合、ファイル名の末尾に"="を付与して移動する。
                         // 例えば、"abdc.jpg"は"abcd=.jpg"に改名とする。
-                        string pathFrom = $"./{cb.Content.ToString()}";
-                        string pathCanditate = $"./{subFolderesList.SelectedItem}/{cb.Content.ToString()}";
-                        string pathTo = "";
+                        string fileName = cb.Content.ToString();
+                        string selectedFolder = subFolderesList.SelectedItem.ToString();
+
+                        string folderPathTo = (selectedFolder == "..") ? Path.GetFullPath($"{currentDirectoryPath}\\..") : $"{currentDirectoryPath}\\{selectedFolder}";
+                        string filePathFrom = $"{currentDirectoryPath}\\{fileName}";
+                        string filePathCanditate = $"{folderPathTo}\\{fileName}";
+                        string filePathTo = "";
                         
                         bool checkingPathCanditate = true;
                         while (checkingPathCanditate == true)
                         {
-                            if (File.Exists(pathCanditate) == true)
+                            if (File.Exists(filePathCanditate) == true)
                             {
-                                pathCanditate = $"./{subFolderesList.SelectedItem}/{Path.GetFileNameWithoutExtension(pathCanditate)}={Path.GetExtension(pathCanditate)}";
+                                filePathCanditate = $"{folderPathTo}\\{Path.GetFileNameWithoutExtension(filePathCanditate)}#{Path.GetExtension(filePathCanditate)}";
                             }
                             else
                             {
@@ -65,13 +69,11 @@ namespace ImageScreener
                             }
                         }
 
-                        pathTo = pathCanditate;
+                        filePathTo = filePathCanditate;
 
-                        File.Move(pathFrom, pathTo);
+                        File.Move(filePathFrom, filePathTo);
                     }
                 }
-
-                imageArea.Children.Clear();
             }
             else
             {
