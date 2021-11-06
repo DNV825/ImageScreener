@@ -10,9 +10,9 @@
       "request": "launch",
       "preLaunchTask": "build",
       // If you have changed target frameworks, make sure to update the program path.
-      "program": "${workspaceFolder}/src/ImageScreener/bin/Debug/net5.0-windows/ImageScreener.dll",
+      "program": "${workspaceFolder}/ImageScreener/bin/Debug/net5.0-windows/win-x64/ImageScreener.dll",
       "args": [],
-      "cwd": "${workspaceFolder}/src/ImageScreener",
+      "cwd": "${workspaceFolder}/ImageScreener",
       // For more information about the 'console' field, see https://aka.ms/VSCode-CS-LaunchJson-Console
       "console": "internalConsole",
       "stopAtEntry": false
