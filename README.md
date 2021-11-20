@@ -11,7 +11,7 @@
 ソースコードをダウンロードし、任意のフォルダに配置する。その後、以下のコマンドを実行して発行（publish）する。
 
 ```shell
-C:\User\任意のフォルダ\ImageScreener> dotnet publish
+C:\User\任意のフォルダ\ImageScreener> dotnet publish /p:PublishProfile=ImageScreener
 ```
 
 ## Usage

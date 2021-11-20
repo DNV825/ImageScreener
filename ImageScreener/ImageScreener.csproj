@@ -3,10 +3,6 @@
     <OutputType>WinExe</OutputType>
     <TargetFramework>net5.0-windows</TargetFramework>
     <UseWPF>true</UseWPF>
-    <!-- 以下の3行で発行（publish）時に単一のexeファイル出力にできる。ただし、通常のデバッグ時にはコメントアウトすること。 -->
-    <PublishSingleFile>true</PublishSingleFile>
-    <SelfContained>false</SelfContained>
-    <RuntimeIdentifier>win-x64</RuntimeIdentifier>
     <!-- exeファイルのアイコンを指定する。 -->
     <ApplicationIcon>img\icon32x32a.ico</ApplicationIcon>
   </PropertyGroup>
