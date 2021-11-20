@@ -43,12 +43,42 @@ namespace ImageScreener
         string _currentDirectoryPath = ".";
 
         /**
+        * ウィンドウのレンダリング完了時の動作。
+        */
+        private async void Window_ContentRendered(object sender, EventArgs eventArgs)
+        {
+            DrawImageArea dia = new DrawImageArea();
+            await dia.Do(ImageArea, ImageFilesCount, _checkboxes, _filestreams, _currentDirectoryPath, DisplayArea, DrawImageProgress, this);
+
+            CreateSubFolderesList csfl = new CreateSubFolderesList();
+            csfl.Do(SubFolderesList, _currentDirectoryPath);
+        }
+
+        /**
         * グリッド「ImageArea」ロード時の動作。
+        * ウィンドウのレンダリング完了時に描画するようにしたので、中身は空っぽ。
         */
         private void ImageArea_Loaded(object sender, RoutedEventArgs eventArgs)
         {
-            DrawImageArea dia = new DrawImageArea();
-            dia.Do(ImageArea, ImageFilesCount, _checkboxes, _filestreams, _currentDirectoryPath, DisplayArea);
+            // DrawImageArea dia = new DrawImageArea();
+            // dia.Do(ImageArea, ImageFilesCount, _checkboxes, _filestreams, _currentDirectoryPath, DisplayArea, DrawImageProgress);
+        }
+
+        /**
+        * F5を押下した場合の動作。
+        * 表示画像とフォルダリストを再描画する。
+        * 動作内容は『グリッド「ImageArea」ロード時の動作』と『リストボックス「SubFolderesList」ロード時の動作。』と同じ。
+        */
+        private async void Window_OnKeyDownHander(object sender, KeyEventArgs eventArgs)
+        {
+            if (eventArgs.Key == Key.F5)
+            {
+                DrawImageArea dia = new DrawImageArea();
+                await dia.Do(ImageArea, ImageFilesCount, _checkboxes, _filestreams, _currentDirectoryPath, DisplayArea, DrawImageProgress, this);
+
+                CreateSubFolderesList csfl = new CreateSubFolderesList();
+                csfl.Do(SubFolderesList, _currentDirectoryPath);
+            }
         }
 
         /**
@@ -77,7 +107,7 @@ namespace ImageScreener
         * テキストボックス「NewFolderName」でエンターキーを押下した場合の動作。
         * 動作内容は［フォルダ作成］ボタン押下時と同様。
         */
-        private void OnKeyDownHander(object sender, KeyEventArgs eventArgs)
+        private void NewFolderName_OnKeyDownHander(object sender, KeyEventArgs eventArgs)
         {
             if (eventArgs.Key == Key.Return)
             {
@@ -103,17 +133,18 @@ namespace ImageScreener
 
         /**
         * リストボックス「SubFolderesList」ロード時の動作。
+        * ウィンドウのレンダリング完了時に描画するようにしたので、中身は空っぽ。
         */
         private void SubFolderesList_Loaded(object sender, RoutedEventArgs eventArgs)
         {
-            CreateSubFolderesList csfl = new CreateSubFolderesList();
-            csfl.Do(SubFolderesList, _currentDirectoryPath);
+            // CreateSubFolderesList csfl = new CreateSubFolderesList();
+            // csfl.Do(SubFolderesList, _currentDirectoryPath);
         }
 
         /**
         * リストボックス「SubFolderesList」のアイテムをダブルクリックした時の動作。
         */
-        private void SubFolderesList_MouseDoubleClick(object sender, RoutedEventArgs eventArgs)
+        private async void SubFolderesList_MouseDoubleClick(object sender, RoutedEventArgs eventArgs)
         {
             ChangeCurrentDirectory ccd = new ChangeCurrentDirectory();
             _currentDirectoryPath = ccd.GetNewCurrentDirectoryPath(SubFolderesList, _currentDirectoryPath);
@@ -122,13 +153,15 @@ namespace ImageScreener
             csfl.Do(SubFolderesList, _currentDirectoryPath);
 
             DrawImageArea dia = new DrawImageArea();
-            dia.Do(ImageArea, ImageFilesCount, _checkboxes, _filestreams, _currentDirectoryPath, DisplayArea);
+            await dia.Do(ImageArea, ImageFilesCount, _checkboxes, _filestreams, _currentDirectoryPath, DisplayArea, DrawImageProgress, this);
+
+            ImageAreaScrollViewer.ScrollToTop();
         }
 
         /**
         * ［フォルダへ移動］ボタン押下時の動作。
         */
-        private void MoveImageToSelectedFolder_Click(object sender, RoutedEventArgs eventArgs)
+        private async void MoveImageToSelectedFolder_Click(object sender, RoutedEventArgs eventArgs)
         {
             // チェックボックスがチェックされているか確認する。
             // checkboxesを2回ループすることになるので効率が悪いが、とりあえず他に方法が思いつかない。
@@ -153,7 +186,7 @@ namespace ImageScreener
                     misf.Do(ImageArea, SubFolderesList, _checkboxes, _filestreams, _currentDirectoryPath);
 
                     DrawImageArea dia = new DrawImageArea();
-                    dia.Do(ImageArea, ImageFilesCount, _checkboxes, _filestreams, _currentDirectoryPath, DisplayArea);
+                    await dia.Do(ImageArea, ImageFilesCount, _checkboxes, _filestreams, _currentDirectoryPath, DisplayArea, DrawImageProgress, this);
                 }
                 else
                 {

@@ -6,6 +6,7 @@ using System.Windows;
 using System.Windows.Input;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
+using System.Threading.Tasks;
 
 namespace ImageScreener
 {
@@ -50,7 +51,15 @@ namespace ImageScreener
         /**
         * ImageAreaにカレントディレクトリの画像ファイルを描画する。
         */
-        public void Do(Grid imageArea, TextBlock imageFilesCount, List<CheckBox> checkboxes, List<FileStream> filestreams, string currentDirectoryPath, Grid displayArea)
+        public async Task Do(
+            Grid imageArea,
+            TextBlock imageFilesCount,
+            List<CheckBox> checkboxes,
+            List<FileStream> filestreams,
+            string currentDirectoryPath,
+            Grid displayArea,
+            ProgressBar drawImageProgress,
+            Window mainWindow)
         {
             // カレントディレクトリに存在する画像の件数を表示する。
             imageFilesCount.Text = this.GetImagesCount(currentDirectoryPath).ToString();
@@ -76,6 +85,11 @@ namespace ImageScreener
             StackPanel currentTargetRow = new StackPanel(); // 現在のターゲット行を指し示す変数。
             const int MAX_DRAWED_IMAGES_COUNT = 100;        // 描画するターゲット画像の最大件数。
             int drawedImagesCount = 0;                      // 描画したターゲット画像の件数。
+
+            // 進捗バーを表示する。
+            drawImageProgress.Maximum = (files.Length >= 100) ? MAX_DRAWED_IMAGES_COUNT : files.Length;
+            drawImageProgress.Value = 0;
+            drawImageProgress.Visibility = Visibility.Visible;
 
             foreach(string imageFileName in files)
             {
@@ -148,11 +162,23 @@ namespace ImageScreener
                         break;
                 }
 
+                // 進捗バーを更新する。
+                await Task.Run(() => 
+                {
+                    mainWindow.Dispatcher.Invoke((Action)(() =>
+                    {
+                       drawImageProgress.Value++;
+                    }));
+                });
+
                 // 画像を100件描画した場合、描画処理を終了する（foreachループを抜ける。）
                 if (drawedImagesCount == MAX_DRAWED_IMAGES_COUNT) {
                     break;
                 }
             }
+
+            // 進捗バーを非表示にする。
+            drawImageProgress.Visibility = Visibility.Hidden;
         }
     }
 }
