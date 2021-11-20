@@ -2,7 +2,7 @@
 
 カレントフォルダに存在する画像をサブフォルダへ移動するファイル整理アプリ。
 
-## Depencency
+## Dependency
 
 - .NET 5 以降（<https://dotnet.microsoft.com/download>）
 
