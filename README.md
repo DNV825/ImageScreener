@@ -57,5 +57,4 @@ C:\User\任意のフォルダ\ImageScreener> dotnet publish /p:PublishProfile=Im
 
 ## References
 
-1. @niusounds, Node.jsでブロードキャストアドレスを取得する, Qiita, 2017/08/18, <https://qiita.com/niusounds/items/712770e79888f4235637>
 1. 出井 秀行, C\#コードレシピ集, 株式会社技術評論社, 2021/08/27 初版 第1刷, ISBN 978-297-12265-2

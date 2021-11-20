@@ -23,7 +23,16 @@ namespace ImageScreener
 
             foreach(string subFolderName in dirs)
             {
-                subFolderesList.Items.Add(subFolderName.Replace($"{currentDirectoryPath}", "").Replace("\\",""));
+                FileAttributes fa = File.GetAttributes(subFolderName);
+
+                if ((fa & FileAttributes.ReparsePoint) == FileAttributes.ReparsePoint)
+                {
+                    // ショートカットの場合は何もしない。
+                }
+                else
+                {
+                    subFolderesList.Items.Add(subFolderName.Replace($"{currentDirectoryPath}", "").Replace("\\",""));
+                }
             }
         }
     }
