@@ -93,7 +93,7 @@ namespace ImageScreener
 
             foreach(string imageFileName in files)
             {
-                // ファイルが画像ファイルであれば描画対象とする。
+                // ファイルが画像ファイル、もしくは動画ファイルであれば描画対象とする。
                 switch(Path.GetExtension(imageFileName).ToLower())
                 {
                     case ".jpg":
@@ -158,6 +158,12 @@ namespace ImageScreener
                             targetImagesCount = 0;
                         }
                         break;
+                    // case ".mpg":
+                    // case ".mpeg":
+                    // case ".mp4":
+                    // case ".webm":
+                    // case ".webp":
+                    //     break;
                     default:
                         break;
                 }
