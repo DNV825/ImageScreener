@@ -13,7 +13,12 @@ namespace ImageScreener
     /// </summary>
     public class MoveImageToSelectedFolder
     {
-        public void Do(Grid imageArea, ListBox subFolderesList, List<CheckBox> checkboxes, List<FileStream> filestreams, string currentDirectoryPath)
+        public void Do(
+            Grid imageArea,
+            ListBox subFolderesList,
+            List<CheckBox> checkboxes,
+            List<Stream> streams,
+            string currentDirectoryPath)
         {
             // チェックボックスがチェックされているか確認する。
             // checkboxesを2回ループすることになるので効率が悪いが、とりあえず他に方法が思いつかない。
@@ -31,7 +36,7 @@ namespace ImageScreener
             {
                 // 表示中の画像のストリームを閉じる（閉じなければファイルを移動できない。）
                 // https://divakk.co.jp/aoyagi/csharp_tips_using.html
-                foreach (FileStream fs in filestreams)
+                foreach (Stream fs in streams)
                 {
                     fs.Close();
                     fs.Dispose();

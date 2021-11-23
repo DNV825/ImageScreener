@@ -34,8 +34,9 @@ namespace ImageScreener
 
         /**
         * イメージをオープンするFileStreamへの参照を保存するリスト。
+        * MemoryStreamも対象にするため、Stream型で定義する。
         */
-        List<FileStream> _filestreams = new List<FileStream>();
+        List<Stream> _streams = new List<Stream>();
 
         /**
         * 画像表示中のカレントディレクトリのパス。
@@ -48,7 +49,7 @@ namespace ImageScreener
         private async void Window_ContentRendered(object sender, EventArgs eventArgs)
         {
             DrawImageArea dia = new DrawImageArea();
-            await dia.Do(ImageArea, ImageFilesCount, _checkboxes, _filestreams, _currentDirectoryPath, DisplayArea, DrawImageProgress, this);
+            await dia.Do(ImageArea, ImageFilesCount, _checkboxes, _streams, _currentDirectoryPath, DisplayArea, DrawImageProgress, this);
 
             CreateSubFolderesList csfl = new CreateSubFolderesList();
             csfl.Do(SubFolderesList, _currentDirectoryPath);
@@ -61,7 +62,7 @@ namespace ImageScreener
         private void ImageArea_Loaded(object sender, RoutedEventArgs eventArgs)
         {
             // DrawImageArea dia = new DrawImageArea();
-            // dia.Do(ImageArea, ImageFilesCount, _checkboxes, _filestreams, _currentDirectoryPath, DisplayArea, DrawImageProgress);
+            // dia.Do(ImageArea, ImageFilesCount, _checkboxes, _streams, _currentDirectoryPath, DisplayArea, DrawImageProgress);
         }
 
         /**
@@ -74,7 +75,7 @@ namespace ImageScreener
             if (eventArgs.Key == Key.F5)
             {
                 DrawImageArea dia = new DrawImageArea();
-                await dia.Do(ImageArea, ImageFilesCount, _checkboxes, _filestreams, _currentDirectoryPath, DisplayArea, DrawImageProgress, this);
+                await dia.Do(ImageArea, ImageFilesCount, _checkboxes, _streams, _currentDirectoryPath, DisplayArea, DrawImageProgress, this);
 
                 CreateSubFolderesList csfl = new CreateSubFolderesList();
                 csfl.Do(SubFolderesList, _currentDirectoryPath);
@@ -153,7 +154,7 @@ namespace ImageScreener
             csfl.Do(SubFolderesList, _currentDirectoryPath);
 
             DrawImageArea dia = new DrawImageArea();
-            await dia.Do(ImageArea, ImageFilesCount, _checkboxes, _filestreams, _currentDirectoryPath, DisplayArea, DrawImageProgress, this);
+            await dia.Do(ImageArea, ImageFilesCount, _checkboxes, _streams, _currentDirectoryPath, DisplayArea, DrawImageProgress, this);
 
             ImageAreaScrollViewer.ScrollToTop();
         }
@@ -183,10 +184,10 @@ namespace ImageScreener
                 if(SubFolderesList.SelectedItems.Count == 1)
                 {
                     MoveImageToSelectedFolder misf = new MoveImageToSelectedFolder();
-                    misf.Do(ImageArea, SubFolderesList, _checkboxes, _filestreams, _currentDirectoryPath);
+                    misf.Do(ImageArea, SubFolderesList, _checkboxes, _streams, _currentDirectoryPath);
 
                     DrawImageArea dia = new DrawImageArea();
-                    await dia.Do(ImageArea, ImageFilesCount, _checkboxes, _filestreams, _currentDirectoryPath, DisplayArea, DrawImageProgress, this);
+                    await dia.Do(ImageArea, ImageFilesCount, _checkboxes, _streams, _currentDirectoryPath, DisplayArea, DrawImageProgress, this);
                 }
                 else
                 {
