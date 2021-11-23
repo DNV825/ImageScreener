@@ -83,6 +83,26 @@ namespace ImageScreener
         }
 
         /**
+        * ［メニュー］-［設定］押下時の動作。
+        */
+        private void Menu_Setting_Click(object sender, RoutedEventArgs eventArgs)
+        {
+            // MessageBox.Show("設定をクリック");
+            SettingDialogWindow sdw = new SettingDialogWindow();
+
+            sdw.Owner = GetWindow(this);
+            sdw.ShowDialog();
+        }
+
+        /**
+        * ［メニュー］-［終了］押下時の動作。
+        */
+        private void Menu_Close_Click(object sender, RoutedEventArgs eventArgs)
+        {
+            Close();
+        }
+
+        /**
         * ［全チェック選択］ボタン押下時の動作。
         */
         private void CheckOnAll_Click(object sender, RoutedEventArgs eventArgs)

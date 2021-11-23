@@ -41,14 +41,14 @@ namespace ImageScreener
         {
             int imagesCount = 0;
 
-            imagesCount += Directory.GetFiles(currentDirectoryPath, "*.jpg", SearchOption.TopDirectoryOnly).GetLength(0);
-            imagesCount += Directory.GetFiles(currentDirectoryPath, "*.jpeg", SearchOption.TopDirectoryOnly).GetLength(0);
-            imagesCount += Directory.GetFiles(currentDirectoryPath, "*.png", SearchOption.TopDirectoryOnly).GetLength(0);
-            imagesCount += Directory.GetFiles(currentDirectoryPath, "*.gif", SearchOption.TopDirectoryOnly).GetLength(0);
-            imagesCount += Directory.GetFiles(currentDirectoryPath, "*.mpg", SearchOption.TopDirectoryOnly).GetLength(0);
-            imagesCount += Directory.GetFiles(currentDirectoryPath, "*.mpeg", SearchOption.TopDirectoryOnly).GetLength(0);
-            imagesCount += Directory.GetFiles(currentDirectoryPath, "*.mp4", SearchOption.TopDirectoryOnly).GetLength(0);
-            imagesCount += Directory.GetFiles(currentDirectoryPath, "*.webm", SearchOption.TopDirectoryOnly).GetLength(0);
+            imagesCount += (Properties.Settings.Default.jpg == true) ? Directory.GetFiles(currentDirectoryPath, "*.jpg", SearchOption.TopDirectoryOnly).GetLength(0) : 0;
+            imagesCount += (Properties.Settings.Default.jpeg == true) ? Directory.GetFiles(currentDirectoryPath, "*.jpeg", SearchOption.TopDirectoryOnly).GetLength(0) : 0;
+            imagesCount += (Properties.Settings.Default.png == true) ? Directory.GetFiles(currentDirectoryPath, "*.png", SearchOption.TopDirectoryOnly).GetLength(0) : 0;
+            imagesCount += (Properties.Settings.Default.gif == true) ? Directory.GetFiles(currentDirectoryPath, "*.gif", SearchOption.TopDirectoryOnly).GetLength(0) : 0;
+            imagesCount += (Properties.Settings.Default.mpg == true) ? Directory.GetFiles(currentDirectoryPath, "*.mpg", SearchOption.TopDirectoryOnly).GetLength(0) : 0;
+            imagesCount += (Properties.Settings.Default.mpeg == true) ? Directory.GetFiles(currentDirectoryPath, "*.mpeg", SearchOption.TopDirectoryOnly).GetLength(0) : 0;
+            imagesCount += (Properties.Settings.Default.mp4 == true) ? Directory.GetFiles(currentDirectoryPath, "*.mp4", SearchOption.TopDirectoryOnly).GetLength(0) : 0;
+            imagesCount += (Properties.Settings.Default.webm == true) ? Directory.GetFiles(currentDirectoryPath, "*.webm", SearchOption.TopDirectoryOnly).GetLength(0) : 0;
 
             return imagesCount;
         }
@@ -104,18 +104,100 @@ namespace ImageScreener
                 switch(Path.GetExtension(imageFileName).ToLower())
                 {
                     case ".jpg":
+                        if (Properties.Settings.Default.jpg == true)
+                        {
+                            isDrawTarget = true;
+                            isVideoFile = false;
+                        }
+                        else
+                        {
+                            isDrawTarget = false;
+                            isVideoFile = false;
+                        }
+                        break;
                     case ".jpeg":
+                        if (Properties.Settings.Default.jpeg == true)
+                        {
+                            isDrawTarget = true;
+                            isVideoFile = false;
+                        }
+                        else
+                        {
+                            isDrawTarget = false;
+                            isVideoFile = false;
+                        }
+                        break;
                     case ".png":
+                        if (Properties.Settings.Default.png == true)
+                        {
+                            isDrawTarget = true;
+                            isVideoFile = false;
+                        }
+                        else
+                        {
+                            isDrawTarget = false;
+                            isVideoFile = false;
+                        }
+                        break;
                     case ".gif":
-                        isDrawTarget = true;
-                        isVideoFile = false;
+                        if (Properties.Settings.Default.gif == true)
+                        {
+                            isDrawTarget = true;
+                            isVideoFile = false;
+                        }
+                        else
+                        {
+                            isDrawTarget = false;
+                            isVideoFile = false;
+                        }
                         break;
                     case ".mpg":
+                        if (Properties.Settings.Default.mpg == true)
+                        {
+                            isDrawTarget = true;
+                            isVideoFile = true;
+                        }
+                        else
+                        {
+                            isDrawTarget = false;
+                            isVideoFile = false;
+                        }
+                        break;
                     case ".mpeg":
+                        if (Properties.Settings.Default.mpeg == true)
+                        {
+                            isDrawTarget = true;
+                            isVideoFile = true;
+                        }
+                        else
+                        {
+                            isDrawTarget = false;
+                            isVideoFile = false;
+                        }
+                        break;
                     case ".mp4":
+                        if (Properties.Settings.Default.mp4 == true)
+                        {
+                            isDrawTarget = true;
+                            isVideoFile = true;
+                        }
+                        else
+                        {
+                            isDrawTarget = false;
+                            isVideoFile = false;
+                        }
+                        break;
                     case ".webm":
-                        isDrawTarget = true;
-                        isVideoFile = true;
+                        if (Properties.Settings.Default.webm == true)
+                        {
+                            isDrawTarget = true;
+                            isVideoFile = true;
+                        }
+                        else
+                        {
+                            isDrawTarget = false;
+                            isVideoFile = false;
+                        }
                         break;
                     default:
                         isDrawTarget = false;

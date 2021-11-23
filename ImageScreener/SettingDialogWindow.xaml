@@ -1,0 +1,46 @@
+﻿<Window x:Class="ImageScreener.SettingDialogWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ImageScreener"
+        mc:Ignorable="d"
+        Title="設定" Height="250" Width="380"
+        Closing="SettingDialogWindow_Closing">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <TextBlock Name="ImageFilesCount" Text="表示するファイルの拡張子を選択してください。" FontSize="20" Margin="5" Grid.Row="0" />
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="100" />
+                <ColumnDefinition Width="100" />
+            </Grid.ColumnDefinitions>
+
+            <Grid Grid.Column="0">
+                <GroupBox Margin="10" Header="静止画">
+                    <StackPanel Orientation="Vertical">
+                        <CheckBox Name="jpg" Content=".jpg" Click="Jpg_Click" />
+                        <CheckBox Name="jpeg" Content=".jpeg" Click="Jpeg_Click" />
+                        <CheckBox Name="png" Content=".png" Click="Png_Click" />
+                        <CheckBox Name="gif" Content=".gif" Click="Gif_Click" />
+                    </StackPanel>
+                </GroupBox>
+            </Grid>
+            <Grid Grid.Column="1">
+                <GroupBox Margin="10" Header="動画">
+                    <StackPanel Orientation="Vertical">
+                        <CheckBox Name="mpg" Content=".mpg" Click="Mpg_Click" />
+                        <CheckBox Name="mpeg" Content=".mpeg" Click="Mpeg_Click" />
+                        <CheckBox Name="mp4" Content=".mp4" Click="Mp4_Click" />
+                        <CheckBox Name="webm" Content=".webm" Click="Webm_Click" />
+                    </StackPanel>
+                </GroupBox>
+            </Grid>
+        </Grid>
+    </Grid>
+</Window>
